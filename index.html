@@ -39,12 +39,11 @@ img{display:block;max-width:100%;}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ═══ ARC TRANSITIONS (полукруг между секциями) ═══ */
+/* ═══ ARC TRANSITIONS — scroll-driven circle grow ═══ */
 .arc {
   position: relative;
-  height: 150px;
+  height: 220px;   /* visible window for the growing arc */
   overflow: hidden;
-  /* gap protection */
   margin-top: -1px;
   margin-bottom: -1px;
 }
@@ -52,30 +51,27 @@ img{display:block;max-width:100%;}
   position: absolute;
   bottom: 0;
   left: 50%;
-  /* Big circle: 200vw × 200vw, only top arc visible */
-  width: 200vw;
-  height: 200vw;
+  width: 220vw;    /* big enough to cover viewport fully */
+  height: 220vw;
   border-radius: 50%;
-  transform: translateX(-50%);
+  /* starts as a tiny point, grows via JS on scroll */
+  transform: translateX(-50%) scale(0);
+  transform-origin: center bottom;
+  will-change: transform;
 }
-/* Variants: background of current section, circle = next section's color */
-.arc.dark-to-cream   { background: var(--burg-d); }
-.arc.dark-to-cream   .arc-circle { background: var(--cream); }
-
-.arc.dark-to-ivory   { background: var(--burg-d); }
-.arc.dark-to-ivory   .arc-circle { background: var(--ivory); }
-
-.arc.dark-to-bg      { background: var(--burg-d); }
-.arc.dark-to-bg      .arc-circle { background: var(--bg); }
-
-.arc.cream-to-dark   { background: var(--cream); }
-.arc.cream-to-dark   .arc-circle { background: var(--burg-d); }
-
-.arc.bg-to-dark      { background: var(--bg); }
-.arc.bg-to-dark      .arc-circle { background: var(--burg-d); }
-
-.arc.ivory-to-dark   { background: var(--ivory); }
-.arc.ivory-to-dark   .arc-circle { background: var(--burg-d); }
+/* Color variants */
+.arc.dark-to-cream  { background: var(--burg-d); }
+.arc.dark-to-cream  .arc-circle { background: var(--cream); }
+.arc.dark-to-ivory  { background: var(--burg-d); }
+.arc.dark-to-ivory  .arc-circle { background: var(--ivory); }
+.arc.dark-to-bg     { background: var(--burg-d); }
+.arc.dark-to-bg     .arc-circle { background: var(--bg); }
+.arc.cream-to-dark  { background: var(--cream); }
+.arc.cream-to-dark  .arc-circle { background: var(--burg-d); }
+.arc.bg-to-dark     { background: var(--bg); }
+.arc.bg-to-dark     .arc-circle { background: var(--burg-d); }
+.arc.ivory-to-dark  { background: var(--ivory); }
+.arc.ivory-to-dark  .arc-circle { background: var(--burg-d); }
 
 /* ═══ ENVELOPE SCREEN ═══ */
 #envScreen {
@@ -982,6 +978,28 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();})
 
 // RSVP
 function sendRSVP(e){e.preventDefault();document.getElementById('rsvpForm').style.display='none';document.getElementById('formOk').style.display='block';}
+
+// ── SCROLL-DRIVEN ARC CIRCLES ──
+// Each .arc div: circle grows from scale(0) at viewport-bottom to scale(1) at viewport-top
+var arcTick=false;
+function updateArcs(){
+  var vh=window.innerHeight;
+  document.querySelectorAll('.arc').forEach(function(arc){
+    var rect=arc.getBoundingClientRect();
+    // 0 when arc enters bottom of screen, 1 when arc reaches top of screen
+    var p=Math.max(0,Math.min(1,(vh-rect.top)/vh));
+    // Ease-out: slow start, fast finish
+    var eased=1-Math.pow(1-p,2.4);
+    var c=arc.querySelector('.arc-circle');
+    if(c) c.style.transform='translateX(-50%) scale('+eased+')';
+  });
+  arcTick=false;
+}
+window.addEventListener('scroll',function(){
+  if(!arcTick){requestAnimationFrame(updateArcs);arcTick=true;}
+},{passive:true});
+// Run once on load so arcs already in view are drawn
+updateArcs();
 
 // Envelope — also triggers music autoplay on user gesture
 function openEnvelope(){
