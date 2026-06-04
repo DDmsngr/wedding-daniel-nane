@@ -39,43 +39,43 @@ img{display:block;max-width:100%;}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ═══ PARALLAX OVERLAP TRANSITIONS ═══
-   Each section has a bottom clip that overlaps the next section by ~50px
-   via negative-margin stacking + z-index layers                         */
-.sec-layer {
+/* ═══ ARC TRANSITIONS (полукруг между секциями) ═══ */
+.arc {
   position: relative;
-  z-index: 1;
-  margin-bottom: -2px; /* avoid sub-pixel gap */
+  height: 150px;
+  overflow: hidden;
+  /* gap protection */
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
-.sec-layer::after {
-  content: '';
+.arc-circle {
   position: absolute;
-  left: 0; right: 0; bottom: -46px;
-  height: 50px;
-  z-index: 2;
-  pointer-events: none;
+  bottom: 0;
+  left: 50%;
+  /* Big circle: 200vw × 200vw, only top arc visible */
+  width: 200vw;
+  height: 200vw;
+  border-radius: 50%;
+  transform: translateX(-50%);
 }
-/* Cream/ivory sections get a downward-pointing wedge */
-.sec-layer.wedge-down::after {
-  background: inherit;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-/* Dark sections get an upward wedge from the bottom */
-.sec-layer.wedge-up-dark::after {
-  background: var(--burg-d);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-.sec-layer.wedge-up-dark2::after {
-  background: var(--dark);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-/* Curve variant */
-.sec-layer.curve::after {
-  height: 60px;
-  bottom: -58px;
-  background: inherit;
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-}
+/* Variants: background of current section, circle = next section's color */
+.arc.dark-to-cream   { background: var(--burg-d); }
+.arc.dark-to-cream   .arc-circle { background: var(--cream); }
+
+.arc.dark-to-ivory   { background: var(--burg-d); }
+.arc.dark-to-ivory   .arc-circle { background: var(--ivory); }
+
+.arc.dark-to-bg      { background: var(--burg-d); }
+.arc.dark-to-bg      .arc-circle { background: var(--bg); }
+
+.arc.cream-to-dark   { background: var(--cream); }
+.arc.cream-to-dark   .arc-circle { background: var(--burg-d); }
+
+.arc.bg-to-dark      { background: var(--bg); }
+.arc.bg-to-dark      .arc-circle { background: var(--burg-d); }
+
+.arc.ivory-to-dark   { background: var(--ivory); }
+.arc.ivory-to-dark   .arc-circle { background: var(--burg-d); }
 
 /* ═══ ENVELOPE SCREEN ═══ */
 #envScreen {
@@ -197,9 +197,9 @@ img{display:block;max-width:100%;}
 }
 @keyframes ecPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
-/* ═══ CARPET BAND ═══ */
+/* Carpet band — kept only for footer strip */
 .carpet-band {
-  height: 88px; position: relative;
+  height: 56px; position: relative;
   background: url('wedding_pic/floral_frame.png') center/cover no-repeat,
               linear-gradient(var(--burg-d), var(--burg-d));
   background-blend-mode: multiply;
@@ -207,12 +207,6 @@ img{display:block;max-width:100%;}
 .carpet-band::after {
   content: ''; position: absolute; inset: 0;
   background: rgba(74,15,27,.42);
-}
-.carpet-band::before {
-  content: ''; position: absolute; z-index: 1;
-  left: 0; right: 0; top: 0; height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(200,160,110,.6) 20%, rgba(200,160,110,.6) 80%, transparent 100%);
-  box-shadow: 0 86px 0 rgba(200,160,110,.45);
 }
 
 /* ═══ SHARED ═══ */
@@ -564,7 +558,7 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 </div>
 
 <!-- ══ HERO ══ -->
-<section class="hero sec-layer" id="top">
+<section class="hero" id="top">
   <div class="hero-photo"></div>
   <div class="hero-bg-pat"></div>
   <div class="hero-card">
@@ -590,7 +584,7 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 </section>
 
 <!-- ══ COUNTDOWN ══ -->
-<section class="countdown sec-layer" id="countdown">
+<section class="countdown" id="countdown">
   <p class="cd-eyebrow">До торжества осталось</p>
   <div class="cd-row reveal">
     <div class="cd-item"><span class="cd-num" id="cdD">00</span><span class="cd-lbl">Дней</span></div>
@@ -600,11 +594,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- ══ CARPET ══ -->
-<div class="carpet-band" aria-hidden="true"></div>
+<!-- Arc: dark countdown → cream dear guests -->
+<div class="arc dark-to-cream" aria-hidden="true"><div class="arc-circle"></div></div>
 
 <!-- ══ DEAR GUESTS ══ -->
-<section class="dear-guests sec-layer" id="dear-guests">
+<section class="dear-guests" id="dear-guests">
   <div class="dg-pom l" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
   <div class="dg-pom r" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
 
@@ -622,11 +616,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- ══ CARPET ══ -->
-<div class="carpet-band" aria-hidden="true"></div>
+<!-- Arc: cream dear guests → cream schedule — same color, subtle dip only -->
+<div class="arc" style="background:var(--cream);height:60px" aria-hidden="true"><div class="arc-circle" style="background:var(--cream);box-shadow:0 0 0 2px rgba(200,160,110,.2)"></div></div>
 
 <!-- ══ PROGRAM ══ -->
-<section class="schedule sec-layer" id="schedule">
+<section class="schedule" id="schedule">
   <div class="schedule-pom pl" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
   <div class="schedule-pom pr" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
 
@@ -684,11 +678,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- ══ CARPET ══ -->
-<div class="carpet-band" aria-hidden="true"></div>
+<!-- Arc: cream schedule → dark dresscode -->
+<div class="arc cream-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
 
 <!-- ══ DRESS CODE ══ -->
-<section class="dresscode-sec sec-layer" id="dresscode">
+<section class="dresscode-sec" id="dresscode">
   <div style="position:relative;max-width:800px;margin:0 auto;">
     <div class="sec-ornament reveal">
       <div class="ol"></div>
@@ -741,8 +735,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
+<!-- Arc: dark dresscode → cream/bg story -->
+<div class="arc dark-to-bg" aria-hidden="true"><div class="arc-circle"></div></div>
+
 <!-- ══ OUR STORY ══ -->
-<section class="story-sec sec-layer" id="gallery">
+<section class="story-sec" id="gallery">
   <div class="sec-ornament reveal">
     <div class="ol"></div>
     <svg width="26" height="26" viewBox="0 0 26 26"><path d="M13,2 L24,13 L13,24 L2,13 Z" fill="none" stroke="#C8A06E" stroke-width="1.3"/><circle cx="13" cy="13" r="3" fill="#C8A06E"/></svg>
@@ -769,8 +766,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
+<!-- Arc: bg story → dark video -->
+<div class="arc bg-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
+
 <!-- ══ VIDEO ══ -->
-<section class="video-sec sec-layer" id="video">
+<section class="video-sec" id="video">
   <div class="sec-ornament reveal">
     <div class="ol"></div>
     <svg width="26" height="26" viewBox="0 0 26 26"><path d="M13,2 L24,13 L13,24 L2,13 Z" fill="none" stroke="rgba(200,160,110,.6)" stroke-width="1.3"/><circle cx="13" cy="13" r="3" fill="#C8A06E"/></svg>
@@ -787,11 +787,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- ══ CARPET ══ -->
-<div class="carpet-band" aria-hidden="true"></div>
+<!-- Arc: dark video → cream wishes -->
+<div class="arc dark-to-cream" aria-hidden="true"><div class="arc-circle"></div></div>
 
 <!-- ══ WISHES ══ -->
-<section class="wishes-sec sec-layer" id="wishes">
+<section class="wishes-sec" id="wishes">
   <div class="wishes-pom-l" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
   <div class="wishes-pom-r" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
 
@@ -839,8 +839,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
+<!-- Arc: cream wishes → dark chance -->
+<div class="arc cream-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
+
 <!-- ══ NOT BY CHANCE ══ -->
-<section class="chance-sec sec-layer" id="chance">
+<section class="chance-sec" id="chance">
   <div class="chance-ornament reveal">
     <div class="ol"></div>
     <svg width="22" height="22" viewBox="0 0 22 22"><path d="M11,2 L20,11 L11,20 L2,11 Z" fill="none" stroke="rgba(200,160,110,.6)" stroke-width="1.2"/><circle cx="11" cy="11" r="2.5" fill="#C8A06E"/></svg>
@@ -855,8 +858,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </p>
 </section>
 
+<!-- Arc: dark chance → ivory rsvp -->
+<div class="arc dark-to-ivory" aria-hidden="true"><div class="arc-circle"></div></div>
+
 <!-- ══ RSVP ══ -->
-<section class="rsvp sec-layer" id="rsvp">
+<section class="rsvp" id="rsvp">
   <div class="sec-ornament reveal">
     <div class="ol"></div>
     <svg width="26" height="26" viewBox="0 0 26 26"><path d="M13,2 L24,13 L13,24 L2,13 Z" fill="none" stroke="#C8A06E" stroke-width="1.3"/><path d="M13,8 L18,13 L13,18 L8,13 Z" fill="var(--burg)" opacity=".18"/><circle cx="13" cy="13" r="3" fill="#C8A06E"/></svg>
