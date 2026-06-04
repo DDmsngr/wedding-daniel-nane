@@ -359,7 +359,22 @@ img{display:block;max-width:100%;}
 /* ═══ OUR STORY ═══ */
 .story-sec { background: var(--bg); padding: 88px 20px; }
 .story-intro { max-width: 540px; margin: 0 auto 50px; text-align: center; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: clamp(16px,2.5vw,19px); color: var(--soft); line-height: 1.9; }
-.filmstrip { background: #0f0f0f; overflow: hidden; }
+/* Wrapper clips the rotated strip */
+.filmstrip-wrap {
+  overflow: hidden;
+  padding: 56px 0;
+  margin: 0;
+  position: relative;
+}
+.filmstrip {
+  background: #0f0f0f;
+  overflow: visible;
+  /* Tilt + widen so edges stay off-screen */
+  transform: rotate(-12deg);
+  width: 130%;
+  margin-left: -15%;
+  box-shadow: 0 12px 48px rgba(0,0,0,.45);
+}
 .film-rail {
   height: 20px; background: #0f0f0f;
   background-image: repeating-linear-gradient(to right, transparent 0 8px, rgba(245,235,215,.22) 8px 22px, transparent 22px 32px);
@@ -738,17 +753,19 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
     Наша история началась с одного взгляда — двух путей, которым суждено было сойтись. Мы шли к этому дню, не зная друг о друге, чтобы встретиться и больше не расставаться.
   </p>
 
-  <div class="filmstrip reveal" style="transition-delay:.1s">
-    <div class="film-rail"></div>
-    <div class="film-photos">
-      <div class="film-photo" onclick="openLb('IMG_20260604_113329_771.jpg')"><img src="IMG_20260604_113329_771.jpg" alt="" loading="lazy"></div>
-      <div class="film-photo" onclick="openLb('IMG_20260604_113332_911.jpg')"><img src="IMG_20260604_113332_911.jpg" alt="" loading="lazy"></div>
-      <div class="film-photo" onclick="openLb('IMG_20260604_113332_980.jpg')"><img src="IMG_20260604_113332_980.jpg" alt="" loading="lazy"></div>
-      <div class="film-photo" onclick="openLb('IMG_20260604_113333_103.jpg')"><img src="IMG_20260604_113333_103.jpg" alt="" loading="lazy"></div>
-      <div class="film-photo" onclick="openLb('IMG_20260604_113333_250.jpg')"><img src="IMG_20260604_113333_250.jpg" alt="" loading="lazy"></div>
-      <div class="film-photo" onclick="openLb('IMG_20260604_113333_539.jpg')"><img src="IMG_20260604_113333_539.jpg" alt="" loading="lazy"></div>
+  <div class="filmstrip-wrap reveal" style="transition-delay:.1s">
+    <div class="filmstrip">
+      <div class="film-rail"></div>
+      <div class="film-photos">
+        <div class="film-photo" onclick="openLb('IMG_20260604_113329_771.jpg')"><img src="IMG_20260604_113329_771.jpg" alt="" loading="lazy"></div>
+        <div class="film-photo" onclick="openLb('IMG_20260604_113332_911.jpg')"><img src="IMG_20260604_113332_911.jpg" alt="" loading="lazy"></div>
+        <div class="film-photo" onclick="openLb('IMG_20260604_113332_980.jpg')"><img src="IMG_20260604_113332_980.jpg" alt="" loading="lazy"></div>
+        <div class="film-photo" onclick="openLb('IMG_20260604_113333_103.jpg')"><img src="IMG_20260604_113333_103.jpg" alt="" loading="lazy"></div>
+        <div class="film-photo" onclick="openLb('IMG_20260604_113333_250.jpg')"><img src="IMG_20260604_113333_250.jpg" alt="" loading="lazy"></div>
+        <div class="film-photo" onclick="openLb('IMG_20260604_113333_539.jpg')"><img src="IMG_20260604_113333_539.jpg" alt="" loading="lazy"></div>
+      </div>
+      <div class="film-rail"></div>
     </div>
-    <div class="film-rail"></div>
   </div>
 </section>
 
