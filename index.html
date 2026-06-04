@@ -374,9 +374,16 @@ img{display:block;max-width:100%;}
   background-image: repeating-linear-gradient(to right, transparent 0 8px, rgba(245,235,215,.22) 8px 22px, transparent 22px 32px);
   background-position: 14px 50%; background-size: auto 13px; background-repeat: repeat-x;
 }
-.film-photos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 5px 0; gap: 4px; }
+/* Film: center-snapping, bidirectional scroll */
+.film-photos {
+  display: flex; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 5px calc(50vw - 110px); /* 110 = half of 220px photo */
+  gap: 4px;
+}
 .film-photos::-webkit-scrollbar { display: none; }
-.film-photo { flex: 0 0 220px; height: 300px; overflow: hidden; scroll-snap-align: start; cursor: pointer; background: #1a1a1a; }
+.film-photo { flex: 0 0 220px; height: 300px; overflow: hidden; scroll-snap-align: center; cursor: pointer; background: #1a1a1a; }
 .film-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) brightness(.85); transition: filter .5s; }
 .film-photo:hover img { filter: grayscale(.15) brightness(1); }
 
@@ -482,9 +489,12 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:700px){
-  .hero-card { padding: 36px 18px; }
-  .hero-corner-img { width: 120px; }
-  .hero-eyebrow { font-size: 8px; letter-spacing: .3em; }
+  /* Hero: hide corner PNG ornaments so they don't overlap text */
+  .hero-corner-img { display: none; }
+  .hero-card { padding: 40px 22px 32px; }
+  .hero-eyebrow { font-size: 8px; letter-spacing: .28em; }
+  /* Envelope pretitle — tighter spacing on narrow screens */
+  .env-pretitle { font-size: 8px; letter-spacing: .22em; }
   .cd-item { padding: 0 12px; }
   .tl-item { grid-template-columns: 58px 1px 1fr; gap: 0 14px; }
   .tl-time { font-size: 20px; }
@@ -496,11 +506,13 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   .env-carpet { height: 70px; }
   .env-pom-corner { width: 110px; }
   .dg-pom, .schedule-pom, .wishes-pom-l, .wishes-pom-r { display: none; }
+  /* Film: 170px photos, recalculate center padding */
   .film-photo { flex: 0 0 170px; height: 240px; }
+  .film-photos { padding: 5px calc(50vw - 85px); } /* 85 = half of 170px */
   .chance-title { font-size: clamp(22px,6vw,34px); }
 }
 @media(max-width:400px){
-  .hero-card { padding: 28px 14px; }
+  .hero-card { padding: 32px 14px 28px; }
   .hero-names { font-size: clamp(48px,14vw,72px); }
   .cd-item { padding: 0 8px; }
 }
@@ -916,12 +928,9 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 <!-- ══ MUSIC BAR ══ -->
 <div class="music-bar" id="musicBar">
   <span class="music-note">♪</span>
-  <div class="music-info">
-    <p class="music-title">Армянская свадебная мелодия</p>
-    <p class="music-sub">Даниэль &amp; Нане · 2026</p>
-  </div>
-  <button class="music-btn" id="mBtn" onclick="toggleMusic()">▶</button>
-  <audio id="aud" loop><source src="2_5280816844830178516.mp3" type="audio/mpeg"></audio>
+  <div class="music-info"></div>
+  <button class="music-btn" id="mBtn" onclick="toggleMusic()">⏸</button>
+  <audio id="aud" loop autoplay><source src="2_5280816844830178516.mp3" type="audio/mpeg"></audio>
 </div>
 
 <script>
@@ -947,8 +956,12 @@ window.addEventListener('scroll',function(){
   if(scrollY>400) document.getElementById('musicBar').classList.add('up');
 },{passive:true});
 
-// Music
+// Music — start on first user interaction (envelope click)
 var playing=false;
+function startMusic(){
+  var a=document.getElementById('aud'),b=document.getElementById('mBtn');
+  a.play().then(function(){playing=true;b.textContent='⏸';}).catch(function(){});
+}
 function toggleMusic(){
   var a=document.getElementById('aud'),b=document.getElementById('mBtn');
   if(playing){a.pause();b.textContent='▶';}else{a.play().catch(function(){});b.textContent='⏸';}
@@ -970,16 +983,29 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();})
 // RSVP
 function sendRSVP(e){e.preventDefault();document.getElementById('rsvpForm').style.display='none';document.getElementById('formOk').style.display='block';}
 
-// Envelope
+// Envelope — also triggers music autoplay on user gesture
 function openEnvelope(){
   var env=document.getElementById('env');
   if(env.classList.contains('opening'))return;
   env.classList.add('opening');
+  startMusic(); // user gesture allows autoplay
   setTimeout(function(){
     document.getElementById('envScreen').classList.add('gone');
     document.body.style.overflow='';
   },3200);
 }
+
+// Filmstrip — scroll to center photo on load
+window.addEventListener('load',function(){
+  var fp=document.querySelector('.film-photos');
+  if(!fp)return;
+  var photos=fp.querySelectorAll('.film-photo');
+  var mid=Math.floor((photos.length-1)/2);
+  if(photos[mid]){
+    // Scroll so middle photo is centered in viewport
+    fp.scrollLeft=photos[mid].offsetLeft-(fp.offsetWidth/2)+(photos[mid].offsetWidth/2);
+  }
+});
 </script>
 </body>
 </html>
