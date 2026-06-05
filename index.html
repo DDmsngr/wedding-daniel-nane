@@ -241,9 +241,9 @@ img{display:block;max-width:100%;}
 .hero-corner-img.br { bottom: -18px; right: -18px; transform: rotate(180deg); }
 
 .hero-eyebrow { font-family: 'Montserrat',sans-serif; font-size: 9px; letter-spacing: .45em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 26px; animation: fadeUp 1.2s ease both .1s; }
-.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.28; color: #fff; animation: fadeUp 1.4s ease both .25s; text-shadow: 0 2px 30px rgba(74,15,27,.55); }
-.amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold); margin: 10px 0; }
-.name-line { display: block; line-height: 1.1; }
+.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.25; color: #fff; animation: fadeUp 1.4s ease both .25s; text-shadow: 0 2px 30px rgba(74,15,27,.55); }
+.amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold); margin: 6px 0; line-height: 1; }
+.name-line { display: block; padding: 2px 0; }
 .hero-divider { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 24px 0 18px; animation: fadeUp 1.4s ease both .4s; }
 .hero-divider .ln { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,110,.8)); }
 .hero-divider .lnr { background: linear-gradient(90deg, rgba(200,160,110,.8), transparent); }
@@ -479,7 +479,9 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   /* Hero: hide corner PNG ornaments so they don't overlap text */
   .hero-corner-img { display: none; }
   .hero-card { padding: 40px 22px 32px; }
-  .hero-names { font-size: clamp(32px,9.5vw,56px); line-height: 1.35; }
+  .hero-names { font-size: clamp(30px,9.5vw,56px); line-height: 1.35; }
+  .name-line { padding: 3px 0; }
+  .amp { margin: 8px 0; }
   .hero-eyebrow { font-size: 8px; letter-spacing: .28em; }
   /* Envelope pretitle — tighter spacing on narrow screens */
   .env-pretitle { font-size: 8px; letter-spacing: .22em; }
@@ -501,7 +503,9 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 }
 @media(max-width:400px){
   .hero-card { padding: 32px 14px 28px; }
-  .hero-names { font-size: clamp(30px,9vw,40px); line-height: 1.4; }
+  .hero-names { font-size: clamp(26px,8vw,36px); line-height: 1.4; }
+  .name-line { padding: 4px 0; }
+  .amp { margin: 10px 0; }
   .cd-item { padding: 0 8px; }
 }
 </style>
@@ -559,9 +563,9 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline poster="IMG_20260604_113338_563.jpg">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="IMG_20260604_113338_563.jpg">
+    <source src="IMG_2714.mp4" type="video/mp4">
     <source src="IMG_2714.MOV" type="video/quicktime">
-    <source src="IMG_2714.MOV" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-bg-pat"></div>
