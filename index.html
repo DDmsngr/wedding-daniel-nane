@@ -218,8 +218,8 @@ img{display:block;max-width:100%;}
 
 /* ═══ HERO ═══ */
 .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 40px 20px 80px; overflow: hidden; }
-.hero-photo { position: absolute; inset: 0; background: url('IMG_20260604_113338_563.jpg') center/cover no-repeat; }
-.hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,15,27,.8) 0%, rgba(28,15,10,.65) 100%); }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,15,27,.75) 0%, rgba(28,15,10,.6) 100%); z-index: 1; }
 .hero-bg-pat {
   position: absolute; inset: 0; z-index: 1; opacity: .055;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40,3 L77,40 L40,77 L3,40 Z' fill='none' stroke='%23C8A06E' stroke-width='1.2'/%3E%3Cpath d='M40,16 L64,40 L40,64 L16,40 Z' fill='none' stroke='%23C8A06E' stroke-width='.9'/%3E%3Ccircle cx='40' cy='40' r='3.5' fill='%23C8A06E'/%3E%3C/svg%3E");
@@ -571,7 +571,11 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="top">
-  <div class="hero-photo"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="IMG_20260604_113338_563.jpg">
+    <source src="IMG_2714.MOV" type="video/mp4">
+    <source src="IMG_2714.MOV" type="video/quicktime">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-bg-pat"></div>
   <div class="hero-card">
     <!-- Floral PNG corners instead of SVG pomegranates -->
@@ -949,9 +953,9 @@ tick(); setInterval(tick,1000);
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.06});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-// Parallax on hero photo
+// Parallax on hero video
 window.addEventListener('scroll',function(){
-  var hero=document.querySelector('.hero-photo');
+  var hero=document.querySelector('.hero-video');
   if(hero) hero.style.transform='translateY('+(scrollY*0.3)+'px)';
   if(scrollY>400) document.getElementById('musicBar').classList.add('up');
 },{passive:true});
