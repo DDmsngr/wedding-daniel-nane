@@ -51,13 +51,16 @@ img{display:block;max-width:100%;}
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 220vw;    /* big enough to cover viewport fully */
+  width: 220vw;
   height: 220vw;
   border-radius: 50%;
-  /* starts as a tiny point, grows via JS on scroll */
   transform: translateX(-50%) scale(0);
   transform-origin: center bottom;
   will-change: transform;
+}
+.arc-circle.arc-visible {
+  transform: translateX(-50%) scale(1);
+  transition: transform 1.1s cubic-bezier(0.19,1,0.22,1);
 }
 /* Color variants */
 .arc.dark-to-cream  { background: var(--burg-d); }
@@ -979,27 +982,22 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();})
 // RSVP
 function sendRSVP(e){e.preventDefault();document.getElementById('rsvpForm').style.display='none';document.getElementById('formOk').style.display='block';}
 
-// ── SCROLL-DRIVEN ARC CIRCLES ──
-// Each .arc div: circle grows from scale(0) at viewport-bottom to scale(1) at viewport-top
-var arcTick=false;
-function updateArcs(){
-  var vh=window.innerHeight;
-  document.querySelectorAll('.arc').forEach(function(arc){
-    var rect=arc.getBoundingClientRect();
-    // 0 when arc enters bottom of screen, 1 when arc reaches top of screen
-    var p=Math.max(0,Math.min(1,(vh-rect.top)/vh));
-    // Ease-out: slow start, fast finish
-    var eased=1-Math.pow(1-p,2.4);
-    var c=arc.querySelector('.arc-circle');
-    if(c) c.style.transform='translateX(-50%) scale('+eased+')';
-  });
-  arcTick=false;
-}
-window.addEventListener('scroll',function(){
-  if(!arcTick){requestAnimationFrame(updateArcs);arcTick=true;}
-},{passive:true});
-// Run once on load so arcs already in view are drawn
-updateArcs();
+// ── ARC CIRCLES — IntersectionObserver ──
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      var c=en.target.querySelector('.arc-circle');
+      if(!c)return;
+      if(en.isIntersecting){
+        c.classList.add('arc-visible');
+      } else if(en.boundingClientRect.top>0){
+        // arc is still below — reset so it re-animates on next scroll
+        c.classList.remove('arc-visible');
+      }
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.arc').forEach(function(a){obs.observe(a);});
+})();
 
 // Envelope — also triggers music autoplay on user gesture
 function openEnvelope(){
