@@ -217,38 +217,23 @@ img{display:block;max-width:100%;}
 .sec-sub { font-family: 'Montserrat',sans-serif; font-weight: 300; font-size: 12px; letter-spacing: .14em; color: var(--soft); text-align: center; margin-bottom: 50px; }
 
 /* ═══ HERO ═══ */
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 40px 20px 80px; overflow: hidden; }
-.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,15,27,.75) 0%, rgba(28,15,10,.6) 100%); z-index: 1; }
-.hero-bg-pat {
-  position: absolute; inset: 0; z-index: 1; opacity: .055;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40,3 L77,40 L40,77 L3,40 Z' fill='none' stroke='%23C8A06E' stroke-width='1.2'/%3E%3Cpath d='M40,16 L64,40 L40,64 L16,40 Z' fill='none' stroke='%23C8A06E' stroke-width='.9'/%3E%3Ccircle cx='40' cy='40' r='3.5' fill='%23C8A06E'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 60px 20px 80px; overflow: hidden; background: var(--ivory); }
+.hero-pom { position: absolute; top: 0; width: 175px; pointer-events: none; z-index: 3; }
+.hero-pom img { width: 100%; height: auto; display: block; }
+.hero-pom.tl { left: 0; transform: scaleX(-1); }
+.hero-pom.tr { right: 0; }
 .hero-card {
-  position: relative; z-index: 2; max-width: 560px; width: 100%;
-  padding: 58px 44px; text-align: center;
-  background: rgba(251,245,230,.07); backdrop-filter: blur(3px);
+  position: relative; z-index: 2; max-width: 480px; width: 100%;
+  padding: 56px 40px; text-align: center; background: var(--ivory);
 }
-.hero-card::before { content: ''; position: absolute; inset: 0; border: 1.5px solid rgba(200,160,110,.82); pointer-events: none; }
-.hero-card::after  { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(200,160,110,.28); pointer-events: none; }
-
-/* Floral corner overlay using real PNG */
-.hero-corner-img {
-  position: absolute; width: 180px; pointer-events: none; z-index: 3; opacity: .75;
-}
-.hero-corner-img.tl { top: -18px; left: -18px; }
-.hero-corner-img.br { bottom: -18px; right: -18px; transform: rotate(180deg); }
-
-.hero-eyebrow { font-family: 'Montserrat',sans-serif; font-size: 9px; letter-spacing: .45em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 26px; animation: fadeUp 1.2s ease both .1s; }
-.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.25; color: #fff; animation: fadeUp 1.4s ease both .25s; text-shadow: 0 2px 30px rgba(74,15,27,.55); }
-.amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold); margin: 6px 0; line-height: 1; }
+.hero-card::before { content: ''; position: absolute; inset: 0; border: 1.5px solid rgba(200,160,110,.75); pointer-events: none; }
+.hero-card::after  { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(200,160,110,.35); pointer-events: none; }
+.hero-frame { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); pointer-events: none; z-index: 4; object-fit: fill; }
+.hero-title { font-family: 'Cormorant Garamond',serif; font-style: italic; font-weight: 300; font-size: clamp(48px,13vw,100px); color: var(--burg-d); line-height: 1.0; margin-bottom: 20px; animation: fadeUp 1.2s ease both .1s; }
+.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.25; color: var(--burg-d); animation: fadeUp 1.4s ease both .25s; }
+.amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold-d); margin: 6px 0; line-height: 1; }
 .name-line { display: block; padding: 2px 0; }
-.hero-divider { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 24px 0 18px; animation: fadeUp 1.4s ease both .4s; }
-.hero-divider .ln { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,110,.8)); }
-.hero-divider .lnr { background: linear-gradient(90deg, rgba(200,160,110,.8), transparent); }
-.hero-date { font-family: 'Cormorant Garamond',serif; font-size: clamp(15px,3vw,18px); letter-spacing: .16em; color: rgba(255,255,255,.92); animation: fadeUp 1.4s ease both .5s; }
-.hero-city { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: clamp(13px,2.5vw,15px); color: var(--gold); margin-top: 6px; animation: fadeUp 1.4s ease both .6s; }
+.hero-date { font-family: 'Cormorant Garamond',serif; font-size: clamp(15px,3vw,18px); letter-spacing: .22em; color: var(--mid); animation: fadeUp 1.4s ease both .4s; margin-top: 22px; }
 .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 20px; cursor: pointer; z-index: 3; animation: bounce 2.2s infinite; user-select: none; }
 @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(9px)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
@@ -316,19 +301,14 @@ img{display:block;max-width:100%;}
 
 /* ═══ DRESS CODE ═══ */
 .dresscode-sec {
-  background: var(--burg-d); padding: 88px 20px 100px; text-align: center;
+  background: var(--cream); padding: 88px 20px 100px; text-align: center;
   position: relative; overflow: hidden;
 }
-.dresscode-sec::before {
-  content: ''; position: absolute; inset: 0; opacity: .06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40,3 L77,40 L40,77 L3,40 Z' fill='none' stroke='%23C8A06E' stroke-width='1.2'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23C8A06E'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
-.dresscode-sec .sec-ornament .ol { background: linear-gradient(90deg, transparent, rgba(200,160,110,.5)); }
-.dresscode-sec .sec-ornament .or { background: linear-gradient(90deg, rgba(200,160,110,.5), transparent); }
-.dresscode-sec .sec-title { color: var(--gold-l); }
-.dc-text { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: 21px; color: rgba(232,207,160,.88); margin-bottom: 6px; position: relative; }
-.dc-note { font-family: 'Montserrat',sans-serif; font-weight: 300; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(200,160,110,.5); margin-bottom: 52px; position: relative; }
+.dresscode-sec .sec-ornament .ol { background: linear-gradient(90deg, transparent, var(--gold)); }
+.dresscode-sec .sec-ornament .or { background: linear-gradient(90deg, var(--gold), transparent); }
+.dresscode-sec .sec-title { color: var(--burg-d); }
+.dc-text { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: 21px; color: var(--mid); margin-bottom: 6px; position: relative; }
+.dc-note { font-family: 'Montserrat',sans-serif; font-weight: 300; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); margin-bottom: 52px; position: relative; }
 
 /* Real silk swatches */
 .palette { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; }
@@ -348,7 +328,7 @@ img{display:block;max-width:100%;}
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(140deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.04) 38%, transparent 58%, rgba(0,0,0,.2) 100%);
 }
-.chip-name { font-family: 'Montserrat',sans-serif; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(200,160,110,.45); }
+.chip-name { font-family: 'Montserrat',sans-serif; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
 
 /* ═══ OUR STORY ═══ */
 .story-sec { background: var(--bg); padding: 88px 20px; }
@@ -418,27 +398,22 @@ img{display:block;max-width:100%;}
 
 /* ═══ NOT BY CHANCE ═══ */
 .chance-sec {
-  background: var(--burg-d); padding: 88px 20px 100px; text-align: center;
+  background: var(--cream); padding: 88px 20px 100px; text-align: center;
   position: relative; overflow: hidden;
 }
-.chance-sec::before {
-  content: ''; position: absolute; inset: 0; opacity: .05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40,3 L77,40 L40,77 L3,40 Z' fill='none' stroke='%23C8A06E' stroke-width='1.2'/%3E%3Ccircle cx='40' cy='40' r='3.5' fill='%23C8A06E'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-}
 .chance-ornament { display: flex; align-items: center; gap: 14px; max-width: 320px; margin: 0 auto 40px; }
-.chance-ornament .ol { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,110,.5)); }
-.chance-ornament .or { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(200,160,110,.5), transparent); }
+.chance-ornament .ol { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.chance-ornament .or { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
 .chance-title {
   font-family: 'Cormorant Garamond',serif; font-weight: 600;
-  font-size: clamp(26px,5vw,46px); color: var(--gold-l);
+  font-size: clamp(26px,5vw,46px); color: var(--burg-d);
   letter-spacing: .06em; margin-bottom: 32px; position: relative;
   line-height: 1.2;
 }
 .chance-body {
   max-width: 520px; margin: 0 auto;
   font-family: 'Cormorant Garamond',serif; font-style: italic;
-  font-size: clamp(15px,2.5vw,20px); color: rgba(232,207,160,.85);
+  font-size: clamp(15px,2.5vw,20px); color: var(--mid);
   line-height: 1.95; position: relative;
 }
 
@@ -476,8 +451,8 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:700px){
-  /* Hero: hide corner PNG ornaments so they don't overlap text */
-  .hero-corner-img { display: none; }
+  .hero-pom { width: 130px; }
+  .hero-title { font-size: clamp(40px,11vw,72px); }
   .hero-card { padding: 40px 22px 32px; }
   .hero-names { font-size: clamp(30px,9.5vw,56px); line-height: 1.35; }
   .name-line { padding: 3px 0; }
@@ -502,6 +477,8 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   .chance-title { font-size: clamp(22px,6vw,34px); }
 }
 @media(max-width:400px){
+  .hero-pom { width: 100px; }
+  .hero-title { font-size: clamp(36px,10vw,56px); }
   .hero-card { padding: 32px 14px 28px; }
   .hero-names { font-size: clamp(26px,8vw,36px); line-height: 1.4; }
   .name-line { padding: 4px 0; }
@@ -563,30 +540,20 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="IMG_20260604_113338_563.jpg">
-    <source src="IMG_2714.mp4" type="video/mp4">
-    <source src="IMG_2714.MOV" type="video/quicktime">
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-bg-pat"></div>
-  <div class="hero-card">
-    <!-- Floral PNG corners instead of SVG pomegranates -->
-    <img class="hero-corner-img tl" src="wedding_pic/floral_frame.png" alt="" aria-hidden="true">
-    <img class="hero-corner-img br" src="wedding_pic/floral_frame.png" alt="" aria-hidden="true">
+  <div class="hero-pom tl" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
+  <div class="hero-pom tr" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
 
-    <p class="hero-eyebrow">Свадебное торжество</p>
+  <div class="hero-card">
+    <!-- Орнаментальная рамка из .ai — экспортируй как wedding_pic/frame.svg -->
+    <img class="hero-frame" src="wedding_pic/frame.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
+    <h1 class="hero-title">Wedding<br>Day</h1>
     <div class="hero-names">
       <span class="name-line">Даниэль</span>
       <span class="amp">&</span>
       <span class="name-line">Нане</span>
     </div>
-    <div class="hero-divider">
-      <div class="ln"></div>
-      <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8,1 L15,8 L8,15 L1,8 Z" fill="none" stroke="rgba(200,160,110,.8)" stroke-width="1.2"/><circle cx="8" cy="8" r="2.5" fill="#C8A06E"/></svg>
-      <div class="ln lnr"></div>
-    </div>
-    <p class="hero-date">22 августа 2026 года</p>
-    <p class="hero-city">Ереван</p>
+    <p class="hero-date">22.08.2026</p>
   </div>
   <div class="scroll-hint" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})">↓</div>
 </section>
@@ -623,9 +590,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
     <div class="or"></div>
   </div>
 </section>
-
-<!-- Arc: cream dear guests → cream schedule — same color, subtle dip only -->
-<div class="arc" style="background:var(--cream);height:60px" aria-hidden="true"><div class="arc-circle" style="background:var(--cream);box-shadow:0 0 0 2px rgba(200,160,110,.2)"></div></div>
 
 <!-- ══ PROGRAM ══ -->
 <section class="schedule" id="schedule">
@@ -686,9 +650,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- Arc: cream schedule → dark dresscode -->
-<div class="arc cream-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
-
 <!-- ══ DRESS CODE ══ -->
 <section class="dresscode-sec" id="dresscode">
   <div style="position:relative;max-width:800px;margin:0 auto;">
@@ -742,9 +703,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
     </div>
   </div>
 </section>
-
-<!-- Arc: dark dresscode → cream/bg story -->
-<div class="arc dark-to-bg" aria-hidden="true"><div class="arc-circle"></div></div>
 
 <!-- ══ OUR STORY ══ -->
 <section class="story-sec" id="gallery">
@@ -823,9 +781,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- Arc: cream wishes → dark chance -->
-<div class="arc cream-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
-
 <!-- ══ NOT BY CHANCE ══ -->
 <section class="chance-sec" id="chance">
   <div class="chance-ornament reveal">
@@ -841,9 +796,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
     Очень ждём вас, чтобы разделить эту радость вместе!
   </p>
 </section>
-
-<!-- Arc: dark chance → ivory rsvp -->
-<div class="arc dark-to-ivory" aria-hidden="true"><div class="arc-circle"></div></div>
 
 <!-- ══ RSVP ══ -->
 <section class="rsvp" id="rsvp">
@@ -921,10 +873,7 @@ tick(); setInterval(tick,1000);
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.06});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-// Parallax on hero video
 window.addEventListener('scroll',function(){
-  var hero=document.querySelector('.hero-video');
-  if(hero) hero.style.transform='translateY('+(scrollY*0.3)+'px)';
   if(scrollY>400) document.getElementById('musicBar').classList.add('up');
 },{passive:true});
 
