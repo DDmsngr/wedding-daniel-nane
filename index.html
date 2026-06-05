@@ -243,6 +243,7 @@ img{display:block;max-width:100%;}
 .hero-eyebrow { font-family: 'Montserrat',sans-serif; font-size: 9px; letter-spacing: .45em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 26px; animation: fadeUp 1.2s ease both .1s; }
 .hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.08; color: #fff; animation: fadeUp 1.4s ease both .25s; text-shadow: 0 2px 30px rgba(74,15,27,.55); }
 .amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold); margin: 4px 0; }
+.name-line { display: block; }
 .hero-divider { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 24px 0 18px; animation: fadeUp 1.4s ease both .4s; }
 .hero-divider .ln { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,110,.8)); }
 .hero-divider .lnr { background: linear-gradient(90deg, rgba(200,160,110,.8), transparent); }
@@ -393,19 +394,6 @@ img{display:block;max-width:100%;}
 .lb-close { position: absolute; top: 20px; right: 24px; color: var(--gold); font-size: 28px; cursor: pointer; opacity: .7; transition: opacity .2s; font-family: 'Montserrat',sans-serif; }
 .lb-close:hover { opacity: 1; }
 
-/* ═══ VIDEO ═══ */
-.video-sec { background: var(--dark); padding: 88px 20px; text-align: center; }
-.video-sec .sec-title { color: var(--gold-l); }
-.video-sec .sec-ornament .ol { background: linear-gradient(90deg, transparent, rgba(200,160,110,.5)); }
-.video-sec .sec-ornament .or { background: linear-gradient(90deg, rgba(200,160,110,.5), transparent); }
-.video-box { max-width: 380px; margin: 40px auto 0; aspect-ratio: 9/16; position: relative; background: #110808; border: 1px solid rgba(200,160,110,.2); overflow: hidden; cursor: pointer; max-height: 80vh; }
-.video-box video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.play-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(74,15,27,.3); transition: background .3s; }
-.play-ov:hover { background: rgba(74,15,27,.1); }
-.play-ring { width: 76px; height: 76px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform .3s, background .3s; }
-.play-ov:hover .play-ring { transform: scale(1.08); background: rgba(200,160,110,.12); }
-.play-tri { width: 0; height: 0; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--gold); margin-left: 5px; }
-
 /* ═══ WISHES (Пожелания) ═══ */
 .wishes-sec {
   background: var(--cream); padding: 88px 20px 100px; text-align: center;
@@ -491,7 +479,7 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   /* Hero: hide corner PNG ornaments so they don't overlap text */
   .hero-corner-img { display: none; }
   .hero-card { padding: 40px 22px 32px; }
-  .hero-names { font-size: clamp(30px,9.5vw,56px); }
+  .hero-names { font-size: clamp(30px,9.5vw,56px); line-height: 1.2; }
   .hero-eyebrow { font-size: 8px; letter-spacing: .28em; }
   /* Envelope pretitle — tighter spacing on narrow screens */
   .env-pretitle { font-size: 8px; letter-spacing: .22em; }
@@ -513,7 +501,7 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 }
 @media(max-width:400px){
   .hero-card { padding: 32px 14px 28px; }
-  .hero-names { font-size: clamp(26px,8.5vw,36px); }
+  .hero-names { font-size: clamp(24px,7.5vw,34px); line-height: 1.25; }
   .cd-item { padding: 0 8px; }
 }
 </style>
@@ -584,9 +572,9 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
 
     <p class="hero-eyebrow">Свадебное торжество</p>
     <div class="hero-names">
-      Даниэль
+      <span class="name-line">Даниэль</span>
       <span class="amp">&</span>
-      Нане
+      <span class="name-line">Нане</span>
     </div>
     <div class="hero-divider">
       <div class="ln"></div>
@@ -782,30 +770,6 @@ footer { background: var(--burg-d); padding: 44px 20px; text-align: center; posi
   </div>
 </section>
 
-<!-- Arc: bg story → dark video -->
-<div class="arc bg-to-dark" aria-hidden="true"><div class="arc-circle"></div></div>
-
-<!-- ══ VIDEO ══ -->
-<section class="video-sec" id="video">
-  <div class="sec-ornament reveal">
-    <div class="ol"></div>
-    <svg width="26" height="26" viewBox="0 0 26 26"><path d="M13,2 L24,13 L13,24 L2,13 Z" fill="none" stroke="rgba(200,160,110,.6)" stroke-width="1.3"/><circle cx="13" cy="13" r="3" fill="#C8A06E"/></svg>
-    <div class="or"></div>
-  </div>
-  <h2 class="sec-title reveal">Видео</h2>
-  <div class="video-box reveal" onclick="playVid()">
-    <video id="vid" preload="none" playsinline>
-      <source src="IMG_2714.MOV" type="video/mp4">
-    </video>
-    <div class="play-ov" id="playOv">
-      <div class="play-ring"><div class="play-tri"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- Arc: dark video → cream wishes -->
-<div class="arc dark-to-cream" aria-hidden="true"><div class="arc-circle"></div></div>
-
 <!-- ══ WISHES ══ -->
 <section class="wishes-sec" id="wishes">
   <div class="wishes-pom-l" aria-hidden="true"><img src="wedding_pic/pomegranate.png" alt=""></div>
@@ -970,13 +934,6 @@ function toggleMusic(){
   var a=document.getElementById('aud'),b=document.getElementById('mBtn');
   if(playing){a.pause();b.textContent='▶';}else{a.play().catch(function(){});b.textContent='⏸';}
   playing=!playing;
-}
-
-// Video
-function playVid(){
-  var v=document.getElementById('vid'),o=document.getElementById('playOv');
-  if(v.paused){v.play().then(function(){o.style.display='none';}).catch(function(){});}
-  else{v.pause();o.style.display='flex';}
 }
 
 // Lightbox
