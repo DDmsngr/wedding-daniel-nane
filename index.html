@@ -161,7 +161,7 @@ img{display:block;max-width:100%;}
 .envelope.opening .env-inner { z-index: 10; animation: letterFly 2.4s cubic-bezier(.4,0,.2,1) .75s both; }
 
 .ec-ey { font-family: 'Montserrat',sans-serif; font-size: 8px; letter-spacing: .45em; text-transform: uppercase; color: var(--gold-d); }
-.ec-nm { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-size: 34px; color: var(--burg-d); line-height: 1.1; }
+.ec-nm { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-size: 34px; color: var(--burg-d); line-height: 1.1; letter-spacing: 0.08em; }
 .ec-dt { font-family: 'Cormorant Garamond',serif; font-size: 14px; letter-spacing: .22em; color: var(--mid); }
 
 .env-fl { position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: linear-gradient(90deg,#EDE0C8,#E8D8C0); clip-path: polygon(0 0,0 100%,100% 50%); z-index: 2; }
@@ -217,20 +217,21 @@ img{display:block;max-width:100%;}
 .sec-sub { font-family: 'Montserrat',sans-serif; font-weight: 300; font-size: 12px; letter-spacing: .14em; color: var(--soft); text-align: center; margin-bottom: 50px; }
 
 /* ═══ HERO ═══ */
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 60px 20px 80px; overflow: hidden; background: var(--ivory); }
-.hero-pom { position: absolute; top: 0; width: 175px; pointer-events: none; z-index: 3; }
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 60px 20px 80px; overflow: hidden; background: url('IMG_20260604_113338_563.jpg') center/cover no-repeat; }
+.hero::before { content: ''; position: absolute; inset: 0; background: rgba(251,245,230,0.60); z-index: 1; }
+.hero-pom { position: absolute; top: 0; width: 175px; pointer-events: none; z-index: 4; }
 .hero-pom img { width: 100%; height: auto; display: block; }
 .hero-pom.tl { left: 0; transform: scaleX(-1); }
 .hero-pom.tr { right: 0; }
 .hero-card {
   position: relative; z-index: 2; max-width: 480px; width: 100%;
-  padding: 56px 40px; text-align: center; background: var(--ivory);
+  padding: 56px 40px; text-align: center; background: rgba(251,245,230,0.93);
 }
 .hero-card::before { content: ''; position: absolute; inset: 0; border: 1.5px solid rgba(200,160,110,.75); pointer-events: none; }
 .hero-card::after  { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(200,160,110,.35); pointer-events: none; }
 .hero-frame { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); pointer-events: none; z-index: 4; object-fit: fill; }
 .hero-title { font-family: 'Cormorant Garamond',serif; font-style: italic; font-weight: 300; font-size: clamp(48px,13vw,100px); color: var(--burg-d); line-height: 1.0; margin-bottom: 20px; animation: fadeUp 1.2s ease both .1s; }
-.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.25; color: var(--burg-d); animation: fadeUp 1.4s ease both .25s; }
+.hero-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-weight: 400; font-size: clamp(38px,11.5vw,96px); line-height: 1.25; color: var(--burg-d); animation: fadeUp 1.4s ease both .25s; letter-spacing: 0.08em; }
 .amp { display: block; font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .38em; letter-spacing: .3em; color: var(--gold-d); margin: 6px 0; line-height: 1; }
 .name-line { display: block; padding: 2px 0; }
 .hero-date { font-family: 'Cormorant Garamond',serif; font-size: clamp(15px,3vw,18px); letter-spacing: .22em; color: var(--mid); animation: fadeUp 1.4s ease both .4s; margin-top: 22px; }
@@ -435,7 +436,7 @@ img{display:block;max-width:100%;}
 
 /* ═══ FOOTER ═══ */
 footer { background: var(--burg-d); padding: 44px 20px; text-align: center; position: relative; overflow: hidden; }
-.footer-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-size: 40px; color: var(--gold-l); margin-bottom: 10px; position: relative; }
+.footer-names { font-family: 'AnastasiaScriptC','Great Vibes',cursive; font-size: 40px; color: var(--gold-l); margin-bottom: 10px; position: relative; letter-spacing: 0.08em; }
 .footer-date { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: .35em; color: rgba(200,160,110,.4); text-transform: uppercase; position: relative; }
 
 /* ═══ MUSIC BAR ═══ */
